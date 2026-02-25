@@ -1,0 +1,130 @@
+<html>
+    <meta http-equiv="refresh">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <head>
+        <title>Wordle</title>
+        <link rel="stylesheet" href="wordle.css">
+        <!-- Monospaced Font -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Bitcount+Single:wght@100..900&family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Rubik:ital,wght@0,300..900;1,300..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+        <script src="wordle.js"></script>
+        <script>
+            window.onload = function() {
+                // This is to store the answer globally
+                answer = "N/A"
+                answer = setup();
+                // This will keep track which row is the active
+                curRow = 0;
+            };
+        </script>
+    </head>
+    <body>
+        <!-- * Wordle Grid -->
+        <div class="entireBox">
+            <div class="entireGrid">
+                <div id="row0" class="gridRow">
+                    <div id="r0c0" class="gridBox"></div>
+                    <div id="r0c1" class="gridBox"></div>
+                    <div id="r0c2" class="gridBox"></div>
+                    <div id="r0c3" class="gridBox"></div>
+                    <div id="r0c4" class="gridBox col5"></div>
+                </div><br/>
+                <div id="row1" class="gridRow">
+                    <div id="r1c0" class="gridBox"></div>
+                    <div id="r1c1" class="gridBox"></div>
+                    <div id="r1c2" class="gridBox"></div>
+                    <div id="r1c3" class="gridBox"></div>
+                    <div id="r1c4" class="gridBox col5"></div>
+                </div><br/>
+                <div id="row2" class="gridRow">
+                    <div id="r2c0" class="gridBox"></div>
+                    <div id="r2c1" class="gridBox"></div>
+                    <div id="r2c2" class="gridBox"></div>
+                    <div id="r2c3" class="gridBox"></div>
+                    <div id="r2c4" class="gridBox col5"></div>
+                </div><br/>
+                <div id="row3" class="gridRow">
+                    <div id="r3c0" class="gridBox"></div>
+                    <div id="r3c1" class="gridBox"></div>
+                    <div id="r3c2" class="gridBox"></div>
+                    <div id="r3c3" class="gridBox"></div>
+                    <div id="r3c4" class="gridBox col5"></div>
+                </div><br/>
+                <div id="row4" class="gridRow">
+                    <div id="r4c0" class="gridBox"></div>
+                    <div id="r4c1" class="gridBox"></div>
+                    <div id="r4c2" class="gridBox"></div>
+                    <div id="r4c3" class="gridBox"></div>
+                    <div id="r4c4" class="gridBox col5"></div>
+                </div><br/>
+                <div id="row5" class="gridRow">
+                    <div id="r5c0" class="gridBox"></div>
+                    <div id="r5c1" class="gridBox"></div>
+                    <div id="r5c2" class="gridBox"></div>
+                    <div id="r5c3" class="gridBox"></div>
+                    <div id="r5c4" class="gridBox col5"></div>
+                </div>
+            </div> <!-- * End of Wordle Grid -->
+            <!-- * User Input and Submit -->
+            <div style="width: 100%">
+                <div class="userInput">
+                    <input type="text" id="wordInput" maxlength="5">
+                </div>
+                <div style="width: 100%">
+                    <div class="userInput">
+                    <button id="guess" onclick="wordGuess()">Guess</button>
+                    <button id="newGame" onclick="newGame()" hidden>New Game</button>
+                    </div>
+                </div>
+            </div> <!-- * End of User Input and Submit -->
+            <!-- * Used Letters Keyboard -->
+            <div class="keyboard">
+                <div style="width: 100%">
+                    <div class="kbRow">
+                        <div class="kbSpace extraSpace">&nbsp;</div>
+                        <div id="keyQ" class="kbBox">Q</div>
+                        <div id="keyW" class="kbBox">W</div>
+                        <div id="keyE" class="kbBox">E</div>
+                        <div id="keyR" class="kbBox">R</div>
+                        <div id="keyT" class="kbBox">T</div>
+                        <div id="keyY" class="kbBox">Y</div>
+                        <div id="keyU" class="kbBox">U</div>
+                        <div id="keyI" class="kbBox">I</div>
+                        <div id="keyO" class="kbBox">O</div>
+                        <div id="keyP" class="kbBox">P</div>
+                    </div>
+                </div>
+                <div style="width: 100%">
+                    <div class="kbRow">
+                        <div class="kbSpace extraSpace">&nbsp;</div>
+                        <div class="kbSpace">&nbsp;</div>
+                        <div id="keyA" class="kbBox">A</div>
+                        <div id="keyS" class="kbBox">S</div>
+                        <div id="keyD" class="kbBox">D</div>
+                        <div id="keyF" class="kbBox">F</div>
+                        <div id="keyG" class="kbBox">G</div>
+                        <div id="keyH" class="kbBox">H</div>
+                        <div id="keyJ" class="kbBox">J</div>
+                        <div id="keyK" class="kbBox">K</div>
+                        <div id="keyL" class="kbBox">L</div>
+                    </div>
+                </div>
+                <div style="width: 100%;">
+                    <div class="kbRow">
+                        <div class="kbSpace extraSpace">&nbsp;</div>
+                        <div class="kbSpace">&nbsp;</div>
+                        <div class="kbSpace">&nbsp;</div>
+                        <div id="keyZ" class="kbBox">Z</div>
+                        <div id="keyX" class="kbBox">X</div>
+                        <div id="keyC" class="kbBox">C</div>
+                        <div id="keyV" class="kbBox">V</div>
+                        <div id="keyB" class="kbBox">B</div>
+                        <div id="keyN" class="kbBox">N</div>
+                        <div id="keyM" class="kbBox">M</div>
+                    </div>
+                </div>
+            </div> <!-- * End of Used Letters Keyboard -->
+        </div>
+    </body>
+</html>

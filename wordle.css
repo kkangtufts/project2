@@ -1,0 +1,49 @@
+/* * Font */
+/* Pick a monospaced font */
+body {font-family:'Source Code Pro'}
+
+/* * Wordle Grid */
+div.entireGrid {width:25%; position:relative; margin:0 auto; min-width:300px;
+                max-width:330px}
+div.gridRow {min-height:50px; min-width:330px; width:100%; display:inline-block;
+                margin-bottom: 2%; max-width:450px;}
+div.gridBox {min-height:50px; min-width:50px; width:5%; height:5%;
+                max-height:75px; max-width:75px; display:inline-block;
+                border: 2px solid #000000; text-align:center;
+                font-size:xx-large; padding-top:5px; margin-right:2%;
+                box-sizing: border-box;}
+div.col5 {margin-right:0}
+/* ? For Debug Purposes*/
+/* div {border: 2px solid #3e8ede;} */
+
+/* * User Input and Submit */
+div.userInput {width:50%; position:relative; margin:0 auto; min-width:200px;
+                max-width:450px; text-align:center}
+input#wordInput {width:105px; font-size:xx-large; height:40px;
+                    font-family: 'Source Code Pro'; text-transform: uppercase;
+                    position:relative; margin:0 auto;}
+
+/* * Used Letters Keyboard */
+div.keyboard {width:75%; position:relative; margin:0 auto; min-width:330px;}
+div.kbRow {min-height:25px; min-width: 330px; width:90%;
+            max-width:450px; position:relative; margin:5px auto;}
+div.kbBox {min-height:25px; min-width: 25px; width:3%; height:3%;
+            display:inline-block; border: 2px solid #000000;
+            text-align:center; padding-top:1px;}
+div.kbSpace {min-height:25px; min-width: 12px; width: 2%; height: 3%;
+                display:inline-block;}
+
+/* * Letter Status */
+div.correct {background-color: green}
+div.present {background-color: goldenrod; color: white}
+div.wrong {background-color: gray; color: white}
+
+/* * Responsive */
+@media (max-width: 600px) {
+    div.gridRow {height: 50px; width: 330px; margin-bottom: 2%;}
+    div.gridBox {height: 50px; width: 50px; margin-right: 10px;}
+    div.col5 {margin-right:0}
+    div.kbRow {height: 25px; width: 400px; margin-top:10px}
+    div.kbBox {height: 25px; width:25px}
+    div.extraSpace {display:none}
+}
