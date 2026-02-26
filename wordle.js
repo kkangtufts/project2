@@ -119,11 +119,9 @@ function newGame() {
     curRow = 0;
 }
 
-// TODO: Figure out how to do cookies for extra credit
 function averageGuess(loss) {
     // For the first time around, it will be empty
     var cookieObj = {};
-    alert("Before Cookie: " + document.cookie);
     if (document.cookie == "") {
         failCount = 0;
         if (loss) {
@@ -136,12 +134,11 @@ function averageGuess(loss) {
                         "failure": failCount
                     }
         document.cookie = JSON.stringify(cookieObj);
-        alert(JSON.stringify(cookieObj));
     }
     else {
         editCookie = JSON.parse(document.cookie);
         //First calculate the total score before incrementing the attempt count
-        total = 0 + editCookie['attempt'] * editCookie['average'];
+        total = Math.round(0 + editCookie['attempt'] * editCookie['average']);
         //Increment the attempt count
         editCookie['attempt']++;
         //Add the new score to the total
@@ -152,11 +149,9 @@ function averageGuess(loss) {
             readCookie['failure']++;
         }
         document.cookie = JSON.stringify(editCookie);
-        alert(JSON.stringify(editCookie));
     }
     
     //Read the cookie to display the results
-    // readCookie = cookieObj;
     readCookie = JSON.parse(document.cookie);
     statStr = "Attempt: " + readCookie['attempt'] + "\nAverage: "
                 + readCookie['average'] + "\nFailure: " + readCookie['failure'];
