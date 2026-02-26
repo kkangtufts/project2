@@ -146,7 +146,7 @@ function averageGuess(loss) {
         //Calculate the new average
         editCookie['average'] = total / editCookie['attempt'];
         if (loss) {
-            readCookie['failure']++;
+            editCookie['failure']++;
         }
         document.cookie = JSON.stringify(editCookie);
     }
