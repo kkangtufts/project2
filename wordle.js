@@ -120,19 +120,46 @@ function newGame() {
 }
 
 // TODO: Figure out how to do cookies for extra credit
-// ! Currently not working
-function averageGuess() {
-//     //document.cookie = [{"name": "wordle"}];
-//     // alert("Before Cookie: |" + document.cookie + "|");
-//     expire = new Date();
-//     expire.setTime(expire.getTime() + (7*24*60*60*1000));
-//     expireTime = "expires=" + expire.toUTCString();
-//     cookieStr = "score=" + curRow + ";" + expireTime;
-//     document.cookie = cookieStr;
-//     //let readCookie = document.cookie;
-//     // alert("Cookie Str: " + cookieStr);
-//     // alert("After Cookie: |" + document.cookie + "|");
-//     // alert("Cookie: " + JSON.stringify(document.cookie));
+function averageGuess(loss) {
+    // For the first time around, it will be empty
+    var cookieObj = {};
+    if (document.cookie == "") {
+        failCount = 0;
+        if (loss) {
+            failCount = 1;
+        }
+        //Start the cookie off as a JSON string
+        cookieObj = {
+                        "attempt": 1,
+                        "average": curRow,
+                        "failure": failCount
+                    }
+        document.cookie = JSON.stringify(cookieObj);
+        alert(JSON.stringify(cookieObj));
+    }
+    else {
+        editCookie = JSON.parse(document.cookie);
+        //First calculate the total score before incrementing the attempt count
+        total = 0 + editCookie['attempt'] * editCookie['average'];
+        //Increment the attempt count
+        editCookie['attempt']++;
+        //Add the new score to the total
+        total += curRow;
+        //Calculate the new average
+        editCookie['average'] = total / editCookie['attempt'];
+        if (loss) {
+            readCookie['failure']++;
+        }
+        document.cookie = JSON.stringify(editCookie);
+        alert(JSON.stringify(editCookie));
+    }
+    
+    //Read the cookie to display the results
+    // readCookie = cookieObj;
+    readCookie = JSON.parse(document.cookie);
+    statStr = "Attempt: " + readCookie['attempt'] + "\nAverage: "
+                + readCookie['average'] + "\nFailure: " + readCookie['failure'];
+    alert(statStr);
 }
 
 //This is the word class that will hold the word information
@@ -247,7 +274,7 @@ function wordGuess() {
         document.getElementById("guess").setAttribute("hidden", "");
         document.getElementById("newGame").removeAttribute("hidden");
         document.getElementById("wordInput").setAttribute("disabled", "");
-        averageGuess();
+        averageGuess(false);
     }
     else {
         //After 6 guesses, the game ends
@@ -256,7 +283,7 @@ function wordGuess() {
             document.getElementById("guess").setAttribute("hidden", "");
             document.getElementById("newGame").removeAttribute("hidden");
             document.getElementById("wordInput").setAttribute("disabled", "");
-            averageGuess();
+            averageGuess(true);
         }
     }
 }
