@@ -153,8 +153,8 @@ function averageGuess(loss) {
     
     //Read the cookie to display the results
     readCookie = JSON.parse(document.cookie);
-    statStr = "Attempt: " + readCookie['attempt'] + "\nAverage: "
-                + readCookie['average'] + "\nFailure: " + readCookie['failure'];
+    statStr = "Attempts: " + readCookie['attempt'] + "\nAverage: "
+                + readCookie['average'] + "\nFailures: " + readCookie['failure'];
     alert(statStr);
 }
 
