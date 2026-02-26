@@ -123,6 +123,7 @@ function newGame() {
 function averageGuess(loss) {
     // For the first time around, it will be empty
     var cookieObj = {};
+    alert("Before Cookie: " + document.cookie);
     if (document.cookie == "") {
         failCount = 0;
         if (loss) {
