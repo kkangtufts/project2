@@ -204,6 +204,8 @@ function wordGuess() {
     // Check to see if the word is valid
     if (!checkWord(wordInput)) {
         alert("Invalid Word: " + wordInput);
+        //Clear away the text field
+        document.getElementById("wordInput").value = "";
         return;
     }
 
