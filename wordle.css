@@ -14,7 +14,7 @@ div.gridBox {min-height:50px; min-width:50px; width:5%; height:5%;
                 box-sizing: border-box;}
 div.col5 {margin-right:0}
 /* ? For Debug Purposes*/
-/*div {border: 2px solid #3e8ede;}*/
+/* div {border: 2px solid #3e8ede;} */
 
 /* * User Input and Submit */
 div.userInput {width:50%; position:relative; margin:0 auto; min-width:200px;
